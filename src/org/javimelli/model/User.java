@@ -3,123 +3,104 @@ package org.javimelli.model;
 
 public class User{
 	
-	private int id_user;
-	private String nombre;
-	private String apellido1;
-	private String apellido2;
-	private String nombre_desarrollador;
-	private String telefono;
+	private int id;
+	private String name;
+	private String Last_name1;
+	private String Last_name2;
+	private String username;
+	private String tlf;
 	private String url_web;
 	private String email;
-	private String pais;
+	private String country;
 	private String url_foto;
 	private String password;
 	
-	public String getUrl_foto() {
-		return url_foto;
+	public User() {
 	}
-
-	public void setUrl_foto(String url_foto) {
-		this.url_foto = url_foto;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public User(){
-		
-	}
-
-	public User(int id_user, String nombre, String apellido1, String apellido2, String nombre_desarrollador,
-			String telefono, String url_web, String email, String pais) {
+	
+	public User(int id, String name, String last_name1, String last_name2, String username, String tlf, String url_web,
+			String email, String country, String url_foto, String password) {
 		super();
-		this.id_user = id_user;
-		this.nombre = nombre;
-		this.apellido1 = apellido1;
-		this.apellido2 = apellido2;
-		this.nombre_desarrollador = nombre_desarrollador;
-		this.telefono = telefono;
+		this.id = id;
+		this.name = name;
+		Last_name1 = last_name1;
+		Last_name2 = last_name2;
+		this.username = username;
+		this.tlf = tlf;
 		this.url_web = url_web;
 		this.email = email;
-		this.pais = pais;
+		this.country = country;
+		this.url_foto = url_foto;
+		this.password = password;
 	}
-
-	public int getId_user() {
-		return id_user;
+	public int getId() {
+		return id;
 	}
-
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getApellido1() {
-		return apellido1;
+	public String getLast_name1() {
+		return Last_name1;
 	}
-
-	public void setApellido1(String apellido1) {
-		this.apellido1 = apellido1;
+	public void setLast_name1(String last_name1) {
+		Last_name1 = last_name1;
 	}
-
-	public String getApellido2() {
-		return apellido2;
+	public String getLast_name2() {
+		return Last_name2;
 	}
-
-	public void setApellido2(String apellido2) {
-		this.apellido2 = apellido2;
+	public void setLast_name2(String last_name2) {
+		Last_name2 = last_name2;
 	}
-
-	public String getNombre_desarrollador() {
-		return nombre_desarrollador;
+	public String getUsername() {
+		return username;
 	}
-
-	public void setNombre_desarrollador(String nombre_desarrollador) {
-		this.nombre_desarrollador = nombre_desarrollador;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-	public String getTelefono() {
-		return telefono;
+	public String getTlf() {
+		return tlf;
 	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setTlf(String tlf) {
+		this.tlf = tlf;
 	}
-
 	public String getUrl_web() {
 		return url_web;
 	}
-
 	public void setUrl_web(String url_web) {
 		this.url_web = url_web;
 	}
-
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public String getPais() {
-		return pais;
+	public String getCountry() {
+		return country;
 	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
+	public void setCountry(String country) {
+		this.country = country;
 	}
+	public String getUrl_foto() {
+		return url_foto;
+	}
+	public void setUrl_foto(String url_foto) {
+		this.url_foto = url_foto;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 	
 	
 }

@@ -42,4 +42,6 @@ public class UsersResouce {
 		//Devolvemos la listaUusarios
 		return listaUsuarios;
     }
+    
+    //Método para el post de un user
 }

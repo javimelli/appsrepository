@@ -7,5 +7,6 @@ import java.util.List;
 public interface UserDao {
 
 	public List<User> getUsersAll();
+	public int addUser(User user);
 	public void setConnection(Connection conn);
 }
