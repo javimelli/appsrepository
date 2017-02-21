@@ -20,7 +20,6 @@ public class User{
 	
 	public User(int id, String name, String last_name1, String last_name2, String username, String tlf, String url_web,
 			String email, String country, String url_foto, String password) {
-		super();
 		this.id = id;
 		this.name = name;
 		Last_name1 = last_name1;

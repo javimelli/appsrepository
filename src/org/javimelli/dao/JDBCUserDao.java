@@ -62,16 +62,16 @@ public class JDBCUserDao  implements UserDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				stmt.executeUpdate("INSERT INTO User (name,Last_name1,Last_name2,username,tlf,url_web,email,country,url_foto,password) VALUES('"
+				stmt.executeUpdate("INSERT INTO user (name,Last_name1,Last_name2,username,tlf,url_web,email,country,url_foto,password) VALUES('"
 									+user.getName()+"','"
-									+user.getLast_name1()+","
-									+user.getLast_name2()+","
-									+user.getUsername()+","
-									+user.getTlf()+","
-									+user.getUrl_web()+","
+									+user.getLast_name1()+"','"
+									+user.getLast_name2()+"','"
+									+user.getUsername()+"','"
+									+user.getTlf()+"','"
+									+user.getUrl_web()+"','"
 									+user.getEmail()+"','"
-									+user.getCountry()+","
-									+user.getUrl_foto()+","
+									+user.getCountry()+"','"
+									+user.getUrl_foto()+"','"
 									+user.getPassword()+"')",Statement.RETURN_GENERATED_KEYS);
 				
 				ResultSet genKeys = stmt.getGeneratedKeys();
@@ -85,7 +85,7 @@ public class JDBCUserDao  implements UserDao{
 			}
 		}
 		
-		return 0;
+		return id;
 	}
 
 	@Override
