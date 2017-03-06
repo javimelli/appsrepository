@@ -81,7 +81,6 @@ public class AppResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postApp(App app, @Context HttpServletRequest request){
     	
-    	System.out.println("Estamos en el método");
     	Response res;
     	
     	//Obtenemos la conexion a la base de datos del contexto de la aplicacion
