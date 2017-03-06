@@ -1,6 +1,7 @@
 package org.javimelli.resources;
 
 import java.sql.Connection;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -18,11 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.javimelli.dao.AppDao;
 import org.javimelli.dao.InstitutionDao;
-import org.javimelli.dao.JDBCAppDao;
 import org.javimelli.dao.JDBCInstitutionDao;
-import org.javimelli.model.App;
 import org.javimelli.model.Institution;
 
 @Path("/institutions")

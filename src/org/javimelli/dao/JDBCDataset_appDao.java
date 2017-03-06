@@ -1,6 +1,7 @@
 package org.javimelli.dao;
 
 import java.sql.Connection;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.javimelli.model.App;
-import org.javimelli.model.Category;
 import org.javimelli.model.Dataset;
 import org.javimelli.model.Dataset_app;
 

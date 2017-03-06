@@ -1,6 +1,7 @@
 package org.javimelli.resources;
 
 import java.sql.Connection;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -12,11 +13,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
-import org.javimelli.dao.AppDao;
 import org.javimelli.dao.CategoryDao;
-import org.javimelli.dao.JDBCAppDao;
 import org.javimelli.dao.JDBCCategoryDao;
-import org.javimelli.model.App;
 import org.javimelli.model.Category;
 
 @Path("/categorys")

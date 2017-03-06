@@ -1,6 +1,7 @@
 package org.javimelli.resources;
 
 import java.sql.Connection;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,11 +18,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.javimelli.dao.AppDao;
-import org.javimelli.dao.JDBCAppDao;
 import org.javimelli.dao.JDBCVote_commentDao;
 import org.javimelli.dao.Vote_commentDao;
-import org.javimelli.model.App;
 import org.javimelli.model.Vote_comment;
 
 @Path("/Votes_comments")

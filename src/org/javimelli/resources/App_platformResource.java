@@ -1,6 +1,7 @@
 package org.javimelli.resources;
 
 import java.sql.Connection;
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -17,14 +18,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.javimelli.dao.App_categoryDao;
 import org.javimelli.dao.App_platformDao;
-import org.javimelli.dao.JDBCApp_categoryDao;
 import org.javimelli.dao.JDBCApp_platformDao;
 import org.javimelli.model.App;
-import org.javimelli.model.App_category;
 import org.javimelli.model.App_platform;
-import org.javimelli.model.Category;
 import org.javimelli.model.Platform;
 
 @Path("/apps_platforms")
