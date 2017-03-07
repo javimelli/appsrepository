@@ -45,12 +45,12 @@ public class JDBCCommentaryDao implements CommentaryDao{
 			}
 			while ( rs.next() ) {
 				Commentary commentary = new Commentary();
-				commentary.setId(rs.getInt("id"));
-				commentary.setUser_id(rs.getInt("user_id"));
-				commentary.setApp_id(rs.getInt("app_id"));
-				commentary.setDate(rs.getString("date"));
-				commentary.setTime(rs.getString("time"));
-				commentary.setText(rs.getString("text"));
+				commentary.setId(rs.getInt(atrId));
+				commentary.setUser_id(rs.getInt(atrUser_id));
+				commentary.setApp_id(rs.getInt(atrApp_id));
+				commentary.setDate(rs.getString(atrDate));
+				commentary.setTime(rs.getString(atrTime));
+				commentary.setText(rs.getString(atrText));
 		
 				commentarys.add(commentary);	
 			}
@@ -72,18 +72,18 @@ public class JDBCCommentaryDao implements CommentaryDao{
 			ResultSet rs;
 			synchronized(conn){
 			  stmt = conn.createStatement();
-			  String sql = "select * from "+tblCommentary+" WHERE user_id="+owner;
+			  String sql = "select * from "+tblCommentary+" WHERE "+atrUser_id+"="+owner;
 			  System.out.println(sql);
 			  rs = stmt.executeQuery(sql);
 			}
 			while ( rs.next() ) {
 				Commentary commentary = new Commentary();
-				commentary.setId(rs.getInt("id"));
-				commentary.setUser_id(rs.getInt("user_id"));
-				commentary.setApp_id(rs.getInt("app_id"));
-				commentary.setDate(rs.getString("date"));
-				commentary.setTime(rs.getString("time"));
-				commentary.setText(rs.getString("text"));
+				commentary.setId(rs.getInt(atrId));
+				commentary.setUser_id(rs.getInt(atrUser_id));
+				commentary.setApp_id(rs.getInt(atrApp_id));
+				commentary.setDate(rs.getString(atrDate));
+				commentary.setTime(rs.getString(atrTime));
+				commentary.setText(rs.getString(atrText));
 		
 				commentarys.add(commentary);	
 			}
@@ -105,18 +105,18 @@ if (conn == null) return null;
 			ResultSet rs;
 			synchronized(conn){
 			  stmt = conn.createStatement();
-			  String sql = "select * from "+tblCommentary+" WHERE app_id="+app;
+			  String sql = "select * from "+tblCommentary+" WHERE "+atrApp_id+"="+app;
 			  System.out.println(sql);
 			  rs = stmt.executeQuery(sql);
 			}
 			while ( rs.next() ) {
 				Commentary commentary = new Commentary();
-				commentary.setId(rs.getInt("id"));
-				commentary.setUser_id(rs.getInt("user_id"));
-				commentary.setApp_id(rs.getInt("app_id"));
-				commentary.setDate(rs.getString("date"));
-				commentary.setTime(rs.getString("time"));
-				commentary.setText(rs.getString("text"));
+				commentary.setId(rs.getInt(atrId));
+				commentary.setUser_id(rs.getInt(atrUser_id));
+				commentary.setApp_id(rs.getInt(atrApp_id));
+				commentary.setDate(rs.getString(atrDate));
+				commentary.setTime(rs.getString(atrTime));
+				commentary.setText(rs.getString(atrText));
 		
 				commentarys.add(commentary);	
 			}
@@ -137,16 +137,16 @@ if (conn == null) return null;
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblCommentary+" WHERE id="+id;
+				String sql = "SELECT * FROM "+tblCommentary+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
-					commentary.setId(rs.getInt("id"));
-					commentary.setUser_id(rs.getInt("user_id"));
-					commentary.setApp_id(rs.getInt("app_id"));
-					commentary.setDate(rs.getString("date"));
-					commentary.setTime(rs.getString("time"));
-					commentary.setText(rs.getString("text"));
+					commentary.setId(rs.getInt(atrId));
+					commentary.setUser_id(rs.getInt(atrUser_id));
+					commentary.setApp_id(rs.getInt(atrApp_id));
+					commentary.setDate(rs.getString(atrDate));
+					commentary.setTime(rs.getString(atrTime));
+					commentary.setText(rs.getString(atrText));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -210,7 +210,7 @@ if (conn == null) return null;
 												+atrUser_id+"="+commentary.getUser_id()+","
 												+atrApp_id+"="+commentary.getApp_id()+","
 												+atrText+"='"+commentary.getText()+"'"
-												+" WHERE id="+commentary.getId();
+												+" WHERE "+atrId+"="+commentary.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -230,7 +230,7 @@ if (conn == null) return null;
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "DELETE FROM "+tblCommentary+" WHERE id="+id;
+				String sql = "DELETE FROM "+tblCommentary+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;

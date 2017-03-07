@@ -171,7 +171,7 @@ public class Vote_commentResource {
     @PUT
     @Path("/{userId: [0-9]+}/{commentId: [0-9]+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putUser(@PathParam("appId") int id, @PathParam("commentId") int comment, Vote_comment commentEdit){
+    public Response putVote_comment(@PathParam("appId") int id, @PathParam("commentId") int comment, Vote_comment commentEdit){
     	
     	Response res = null;
     	

@@ -119,7 +119,7 @@ public class JDBCUserDao  implements UserDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblUser+" WHERE id="+id;
+				String sql = "SELECT * FROM "+tblUser+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -153,7 +153,7 @@ public class JDBCUserDao  implements UserDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblUser+" WHERE username='"+name+"'";
+				String sql = "SELECT * FROM "+tblUser+" WHERE "+atrUsername+"='"+name+"'";
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -197,7 +197,7 @@ public class JDBCUserDao  implements UserDao{
 												+atrCountry+"='"+user.getCountry()+"',"
 												+atrUrl_foto+"='"+user.getUrl_foto()+"',"
 												+atrPassword+"='"+user.getPassword()+"'"
-												+" WHERE id="+user.getId();
+												+" WHERE "+atrId+"="+user.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -216,7 +216,7 @@ public class JDBCUserDao  implements UserDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "DELETE FROM user WHERE id ="+id;
+				String sql = "DELETE FROM user WHERE "+atrId+" ="+id;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;

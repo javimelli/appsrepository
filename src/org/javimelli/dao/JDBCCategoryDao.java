@@ -59,7 +59,7 @@ public class JDBCCategoryDao implements CategoryDao{
 			ResultSet rs;
 			synchronized(conn){
 			  stmt = conn.createStatement();
-			  String sql = "select * from "+tblCategory+" WHERE id="+categoryId;
+			  String sql = "select * from "+tblCategory+" WHERE "+atrId+"="+categoryId;
 			  System.out.println(sql);
 			  rs = stmt.executeQuery(sql);
 			}

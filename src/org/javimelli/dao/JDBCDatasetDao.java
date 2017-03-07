@@ -68,7 +68,7 @@ public class JDBCDatasetDao implements DatasetDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblDataset+" WHERE id="+id;
+				String sql = "SELECT * FROM "+tblDataset+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -234,7 +234,7 @@ public class JDBCDatasetDao implements DatasetDao{
 												+atrDescription+"='"+dataset.getDescription()+"',"
 												+atrUri_dataset+"='"+dataset.getUri_dataset()+"',"
 												+atrInstitution+"="+dataset.getInstitution_id()
-												+" WHERE id="+dataset.getId();
+												+" WHERE "+atrId+"="+dataset.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -254,7 +254,7 @@ public class JDBCDatasetDao implements DatasetDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "DELETE FROM "+tblDataset+" WHERE id="+id;
+				String sql = "DELETE FROM "+tblDataset+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;

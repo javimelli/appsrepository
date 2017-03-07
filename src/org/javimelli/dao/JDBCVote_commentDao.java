@@ -31,15 +31,15 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblVote_comment+" WHERE user_id="+user;
+				String sql = "SELECT * FROM "+tblVote_comment+" WHERE "+atrUser_id+"="+user;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				while(rs.next()){
 					Vote_comment vote = new Vote_comment();
-					vote.setUser_id(rs.getInt("user_id"));
-					vote.setCommentary_id(rs.getInt("commentary_id"));
-					vote.setValue(rs.getBoolean("value"));
-					vote.setComplaint(rs.getBoolean("complaint"));
+					vote.setUser_id(rs.getInt(atrUser_id));
+					vote.setCommentary_id(rs.getInt(atrCommentary_id));
+					vote.setValue(rs.getBoolean(atrValue));
+					vote.setComplaint(rs.getBoolean(atrComplaint));
 					
 					listVotes.add(vote);
 				}
@@ -60,15 +60,15 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblVote_comment+" WHERE commentary_id="+commentary;
+				String sql = "SELECT * FROM "+tblVote_comment+" WHERE "+atrCommentary_id+"="+commentary;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				while(rs.next()){
 					Vote_comment vote = new Vote_comment();
-					vote.setUser_id(rs.getInt("user_id"));
-					vote.setCommentary_id(rs.getInt("commentary_id"));
-					vote.setValue(rs.getBoolean("value"));
-					vote.setComplaint(rs.getBoolean("complaint"));
+					vote.setUser_id(rs.getInt(atrUser_id));
+					vote.setCommentary_id(rs.getInt(atrCommentary_id));
+					vote.setValue(rs.getBoolean(atrValue));
+					vote.setComplaint(rs.getBoolean(atrComplaint));
 					
 					listVotes.add(vote);
 				}
@@ -89,14 +89,14 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblVote_comment+" WHERE commentary_id="+comment+" AND user_id="+user;
+				String sql = "SELECT * FROM "+tblVote_comment+" WHERE "+atrCommentary_id+"="+comment+" AND "+atrUser_id+"="+user;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
-					vote.setUser_id(rs.getInt("user_id"));
-					vote.setCommentary_id(rs.getInt("commentary_id"));
-					vote.setValue(rs.getBoolean("value"));
-					vote.setComplaint(rs.getBoolean("complaint"));
+					vote.setUser_id(rs.getInt(atrUser_id));
+					vote.setCommentary_id(rs.getInt(atrCommentary_id));
+					vote.setValue(rs.getBoolean(atrValue));
+					vote.setComplaint(rs.getBoolean(atrComplaint));
 									}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -113,7 +113,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			Statement stmt;
 			try{
 				stmt = conn.createStatement();
-				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE complaint=true AND commentary_id="+comment;
+				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE "+atrComplaint+"=true AND "+atrCommentary_id+"="+comment;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -169,7 +169,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 												+atrCommentary_id+"="+vote.getCommentary_id()+","
 												+atrValue+"="+vote.getValue()+","
 												+atrComplaint+"="+vote.isComplaint()
-												+" WHERE user_id="+vote.getUser_id()+" AND commentary_id="+vote.getCommentary_id();
+												+" WHERE "+atrUser_id+"="+vote.getUser_id()+" AND "+atrCommentary_id+"="+vote.getCommentary_id();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -192,7 +192,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			Statement stmt;
 			try{
 				stmt = conn.createStatement();
-				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE value=true AND commentary_id="+comment;
+				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE "+atrValue+"=true AND "+atrCommentary_id+"="+comment;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -212,7 +212,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 			Statement stmt;
 			try{
 				stmt = conn.createStatement();
-				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE value=false AND commentary_id="+comment;
+				String sql ="SELECT COUNT(*) as total FROM "+tblVote_comment+" WHERE "+atrValue+"=false AND "+atrCommentary_id+"="+comment;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){

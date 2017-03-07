@@ -77,7 +77,7 @@ public class JDBCAppDao implements AppDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblApp+" WHERE user_id="+owner;
+				String sql = "SELECT * FROM "+tblApp+" WHERE "+atrUser_id+"="+owner;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				while(rs.next()){
@@ -114,7 +114,7 @@ public class JDBCAppDao implements AppDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblApp+" WHERE id="+id;
+				String sql = "SELECT * FROM "+tblApp+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -196,7 +196,7 @@ public class JDBCAppDao implements AppDao{
 												+atrUrl_video+"='"+app.getUrl_video()+"',"
 												+atrLanguage+"='"+app.getLanguage()+"',"
 												+atrCountry+"='"+app.getCountry()+"'"
-												+" WHERE id="+app.getId();
+												+" WHERE "+atrId+"="+app.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -216,7 +216,7 @@ public class JDBCAppDao implements AppDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "DELETE FROM "+tblApp+" WHERE id="+id;
+				String sql = "DELETE FROM "+tblApp+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;

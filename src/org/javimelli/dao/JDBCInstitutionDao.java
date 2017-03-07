@@ -66,7 +66,7 @@ public class JDBCInstitutionDao implements InstitutionDao{
 			
 			try{
 				stmt = conn.createStatement();
-				String sql = "SELECT * FROM "+tblInstitution+" WHERE id="+id;
+				String sql = "SELECT * FROM "+tblInstitution+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
@@ -129,7 +129,7 @@ public class JDBCInstitutionDao implements InstitutionDao{
 												+atrCountry+"='"+institution.getCountry()+"',"
 												+atrCity+"='"+institution.getCity()+"',"
 												+atrProvince+"='"+institution.getProvince()+"'"
-												+" WHERE id="+institution.getId();
+												+" WHERE "+atrId+"="+institution.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				save = true;
@@ -149,7 +149,7 @@ public class JDBCInstitutionDao implements InstitutionDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "DELETE FROM "+tblInstitution+" WHERE id="+id;
+				String sql = "DELETE FROM "+tblInstitution+" WHERE "+atrId+"="+id;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;
