@@ -17,6 +17,7 @@ public class JDBCCategoryDao implements CategoryDao{
 	//CONSTANTES DE ATRIBUTOS DE TABLA
 	private static final String atrId = "id";
 	private static final String atrName = "name";
+	private static final String atrDescription = "description";
 	
 	private Connection conn;
 	
@@ -39,6 +40,7 @@ public class JDBCCategoryDao implements CategoryDao{
 				Category category = new Category();
 				category.setId(rs.getInt(atrId));
 				category.setName(rs.getString(atrName));
+				category.setDescription(rs.getString(atrDescription));
 		
 				categorys.add(category);	
 			}
@@ -66,6 +68,7 @@ public class JDBCCategoryDao implements CategoryDao{
 			if ( rs.next() ) {
 				category.setId(rs.getInt(atrId));
 				category.setName(rs.getString(atrName));
+				category.setDescription(rs.getString(atrDescription));
 			}
 
 		} catch (SQLException e) {

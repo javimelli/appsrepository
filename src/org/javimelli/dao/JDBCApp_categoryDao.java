@@ -21,6 +21,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 	//CONSTANTES DE ATRIBUTOS DE TABLA app_category
 	private static final String atrApp_id = "app_id";
 	private static final String atrCategory_id = "category_id";
+	private static final String atrCategory_description = "description";
 	
 	//CONSTANTES DE ATRIBUTOS DE TABLA category
 	private static final String atrId = "id";
@@ -58,6 +59,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 					Category category = new Category();
 					category.setId(rs.getInt(atrId));
 					category.setName(rs.getString(atrName));
+					category.setDescription(rs.getString(atrCategory_description));
 					
 					ListCategorys.add(category);
 				}
