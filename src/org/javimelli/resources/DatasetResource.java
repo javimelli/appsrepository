@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.UriInfo;
 import org.javimelli.dao.DatasetDao;
 import org.javimelli.dao.JDBCDatasetDao;
 import org.javimelli.model.Dataset;
+import org.javimelli.model.User;
 
 @Path("/datasets")
 public class DatasetResource {
@@ -116,15 +118,19 @@ public class DatasetResource {
     	DatasetDao datasetDao = new JDBCDatasetDao();
     	datasetDao.setConnection(conn);
     	
-		int id = datasetDao.add(dataset);
+    	HttpSession session = (HttpSession) request.getSession();
+    	User user = (User) session.getAttribute("user");
+    	
+    	int id = 9999;
+    	
+    	if(user != null){
+    		dataset.setUser_id(user.getId());
+    		id = datasetDao.add(dataset);
+    	}
     	
 		//Creamos una respuesta
 		res = Response //return 201 y la localizacion del nuevo recurso
-			.created(
-					uriInfo
-					.getAbsolutePathBuilder()
-					.path(Integer.toString(id))
-					.build())
+			.ok(Integer.toString(id))
 			.contentLocation(
 					uriInfo
 					.getAbsolutePathBuilder()

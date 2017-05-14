@@ -28,6 +28,7 @@ public class JDBCAppDao implements AppDao{
 	private static final String atrUrl_video = "url_video";
 	private static final String atrLanguage = "language";
 	private static final String atrCountry = "country";
+	private static final String atrId_fotos = "id_fotos";
 	
 	@Override
 	public List<App> getAppsAll() {
@@ -57,6 +58,7 @@ public class JDBCAppDao implements AppDao{
 				app.setUrl_video(rs.getString(atrUrl_video));
 				app.setLanguage(rs.getString(atrLanguage));
 				app.setCountry(rs.getString(atrCountry));
+				app.setId_fotos(rs.getString(atrId_fotos));
 		
 				apps.add(app);	
 			}
@@ -93,6 +95,7 @@ public class JDBCAppDao implements AppDao{
 					app.setUrl_video(rs.getString(atrUrl_video));
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
+					app.setId_fotos(rs.getString(atrId_fotos));
 					
 					listApps.add(app);
 				}
@@ -129,6 +132,7 @@ public class JDBCAppDao implements AppDao{
 					app.setUrl_video(rs.getString(atrUrl_video));
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
+					app.setId_fotos(rs.getString(atrId_fotos));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -147,7 +151,7 @@ public class JDBCAppDao implements AppDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+") VALUES("
+				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+","+atrId_fotos+") VALUES("
 						+app.getId()+","
 						+app.getUser_id()+",'"
 						+app.getUrl_web()+"','"
@@ -158,7 +162,8 @@ public class JDBCAppDao implements AppDao{
 						+app.getVersion()+",'"
 						+app.getUrl_video()+"','"
 						+app.getLanguage()+"','"
-						+app.getCountry()+"')";
+						+app.getCountry()+"','"
+						+app.getId_fotos()+"')";
 				System.out.println(sql);
 				stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 				

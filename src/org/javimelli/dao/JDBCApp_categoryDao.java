@@ -39,6 +39,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 	private static final String atrAppUrl_video = "url_video";
 	private static final String atrAppLanguage = "language";
 	private static final String atrAppCountry = "country";
+	private static final String atrAppId_fotos = "id_fotos";
 	
 	private Connection conn;
 	
@@ -173,6 +174,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 					app.setUrl_video(rs.getString(atrAppUrl_video));
 					app.setLanguage(rs.getString(atrAppLanguage));
 					app.setCountry(rs.getString(atrAppCountry));
+					app.setId_fotos(rs.getString(atrAppId_fotos));
 					
 					ListApps.add(app);
 				}

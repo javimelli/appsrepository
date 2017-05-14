@@ -74,12 +74,8 @@ public class InstitutionResource {
 		int id = institutionDao.add(institution);
     	
 		//Creamos una respuesta
-		res = Response //return 201 y la localizacion del nuevo recurso
-			.created(
-					uriInfo
-					.getAbsolutePathBuilder()
-					.path(Integer.toString(id))
-					.build())
+		//return 201 y la localizacion del nuevo recurso
+		res = Response.ok(Integer.toString(id))
 			.contentLocation(
 					uriInfo
 					.getAbsolutePathBuilder()

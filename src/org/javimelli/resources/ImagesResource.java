@@ -1,12 +1,10 @@
 package org.javimelli.resources;
 
 import java.sql.Connection;
-
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -21,14 +19,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import org.javimelli.model.App;
-import org.javimelli.model.User;
 import org.javimelli.dao.AppDao;
+import org.javimelli.dao.ImagesDao;
 import org.javimelli.dao.JDBCAppDao;
+import org.javimelli.dao.JDBCImagesDao;
+import org.javimelli.model.Images;
 
-@Path("/apps")
-public class AppResource {
-	
+@Path("/images")
+public class ImagesResource {
+
 	@Context//Obtenemos el contexto de la aplicacion
 	ServletContext sc;
 	@Context//Obtenemos el URI completo de la solicitud
@@ -36,72 +35,49 @@ public class AppResource {
 	
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<App> getApps() {
+    public List<Images> getApps() {
     	
     	//Obtenemos la conexion a la base de datos del contexto de la aplicacion
 		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
+		ImagesDao imagesDao = new JDBCImagesDao();
+		imagesDao.setConnection(conn);
 		
-		List<App> listApp = appDao.getAppsAll();
+		List<Images> listImages = imagesDao.getAllImages();
 		
-		return listApp;
+		return listImages;
     }
     
     @GET
-    @Path("/owner/{appId: [0-9]+}")
+    @Path("/id_fotos/{Id_fotos}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<App> getAllsByOwner(@PathParam("appId") int id){
+    public List<Images> getAllsByOwner(@PathParam("Id_fotos") String id){
     	
-    	List<App> listApps = null;
+    	List<Images> listImages = null;
     	
     	//Obtenemos la conexion a la base de datos del contexto de la aplicacion
 		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
+		ImagesDao imagesDao = new JDBCImagesDao();
+		imagesDao.setConnection(conn);
 		
-		listApps = appDao.getAllByOwner(id);
+		listImages = imagesDao.getById_fotos(id);
     	
-    	return listApps;
+    	return listImages;
     }
-    
-    @GET
-	@Path("/{appId: [0-9]+}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public App getAppId(@PathParam("appId") int id, @Context HttpServletRequest request){
-		
-		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
-		
-		App app = null;
-		app = appDao.getById(id);
-		
-		return app;
-	}
     
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response postApp(App app, @Context HttpServletRequest request){
+    public Response postApp(Images img, @Context HttpServletRequest request){
     	
     	Response res;
     	
     	//Obtenemos la conexion a la base de datos del contexto de la aplicacion
 		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
-		
-		HttpSession session = (HttpSession) request.getSession();
-    	User user = (User) session.getAttribute("user");
+		ImagesDao imagesDao = new JDBCImagesDao();
+		imagesDao.setConnection(conn);
     	
     	int id = 9999;
     	
-    	if(user != null){
-    		app.setUser_id(user.getId());
-    		id = appDao.addApp(app);
-    	}
-    	
-		
+		id = imagesDao.addImages(img);
     	
 		//Creamos una respuesta
 		res = Response //return 201 y la localizacion del nuevo recurso
@@ -117,23 +93,23 @@ public class AppResource {
     }
     
     @PUT
-    @Path("/{appId: [0-9]+}")
+    @Path("/{Id: [0-9]+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putUser(@PathParam("appId") int id, App appEdit){
+    public Response putUser(@PathParam("Id") int id, Images imgEdit){
     	
     	Response res = null;
     	
-		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
+    	Connection conn = (Connection) sc.getAttribute("dbConn");
+		ImagesDao imagesDao = new JDBCImagesDao();
+		imagesDao.setConnection(conn);
 		
-		App app = appDao.getById(appEdit.getId());
+		Images imgs = imagesDao.getById(id);
 		
-		if(app == null){
+		if(imgs == null){
 			//Lazamos EXCEPTION
 		}else{
-			if(app.getId() == appEdit.getId()){
-				appDao.save(appEdit);
+			if(imgs.getId() == imgEdit.getId()){
+				imagesDao.save(imgEdit);
 			}
 			else{
 				//LANZAMOS EXCEPTION DE ID
@@ -144,19 +120,19 @@ public class AppResource {
     }
     
     @DELETE
-    @Path("/{appId: [0-9]+}")
-    public void deleteUserId(@PathParam("appId") int id){
+    @Path("/{imgId: [0-9]+}")
+    public void deleteUserId(@PathParam("imgId") int id){
     	
-		Connection conn = (Connection) sc.getAttribute("dbConn");
-		AppDao appDao = new JDBCAppDao();
-		appDao.setConnection(conn);
+    	Connection conn = (Connection) sc.getAttribute("dbConn");
+		ImagesDao imagesDao = new JDBCImagesDao();
+		imagesDao.setConnection(conn);
 		
-		App app = appDao.getById(id);
+		Images img = imagesDao.getById(id);
 		
-		if(app == null){
+		if(img == null){
 			//Lazamos EXCEPTION
 		}else{
-			appDao.delete(id);
+			imagesDao.delete(id);
 		}
     }
 }

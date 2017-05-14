@@ -2,6 +2,7 @@ package org.javimelli.resources;
 
 import java.sql.Connection;
 
+
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -77,11 +78,7 @@ public class Dataset_appResource {
     	
 		//Creamos una respuesta
 		res = Response //return 201 y la localizacion del nuevo recurso
-			.created(
-					uriInfo
-					.getAbsolutePathBuilder()
-					.path(Integer.toString(id))
-					.build())
+			.ok(Integer.toString(id))
 			.contentLocation(
 					uriInfo
 					.getAbsolutePathBuilder()

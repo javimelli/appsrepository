@@ -13,6 +13,7 @@ public class App {
 	private String url_video;
 	private String language;
 	private String country;
+	private String id_fotos;
 	
 	public App(){
 		
@@ -120,6 +121,14 @@ public class App {
 
 	public void setCountry(String conuntry) {
 		this.country = conuntry;
+	}
+
+	public String getId_fotos() {
+		return id_fotos;
+	}
+
+	public void setId_fotos(String id_fotos) {
+		this.id_fotos = id_fotos;
 	}
 	
 	

@@ -76,11 +76,7 @@ public class App_platformResource {
     	
 		//Creamos una respuesta
 		res = Response //return 201 y la localizacion del nuevo recurso
-			.created(
-					uriInfo
-					.getAbsolutePathBuilder()
-					.path(Integer.toString(id))
-					.build())
+			.ok(Integer.toString(id))
 			.contentLocation(
 					uriInfo
 					.getAbsolutePathBuilder()
