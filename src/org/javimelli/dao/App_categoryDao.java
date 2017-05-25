@@ -14,5 +14,6 @@ public interface App_categoryDao {
 	public int add(App_category app_category);
 	public boolean save(App_category app_category, int idCategoryOld);
 	public boolean delete(App_category app_category);
+	public boolean delete(int app);
 	public void setConnection(Connection conn);
 }

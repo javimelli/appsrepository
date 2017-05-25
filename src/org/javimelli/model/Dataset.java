@@ -8,6 +8,7 @@ public class Dataset {
 	private String description;
 	private String uri_dataset;
 	private int institution_id;
+	private String title;
 	
 	public Dataset(){
 		
@@ -69,6 +70,14 @@ public class Dataset {
 
 	public void setInstitution_id(int institution_id) {
 		this.institution_id = institution_id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	
 	

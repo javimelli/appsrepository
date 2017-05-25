@@ -8,12 +8,10 @@
       <param-name>jersey.config.server.provider.packages</param-name>
       <param-value>org.javimelli.resources</param-value>
     </init-param>
-    <!--  Este es el código que se añade para porder utilizar multipart -->
-    <init-param>  
-    	<param-name>jersey.config.server.provider.classnames</param-name>  
-    	<param-value>org.glassfish.jersey.filter.LoggingFilter; org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>  
-	</init-param>
-	<!-- -->
+    <init-param>
+      <param-name>jersey.config.server.provider.classnames</param-name>
+      <param-value>org.glassfish.jersey.filter.LoggingFilter; org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>
+    </init-param>
   </servlet>
   <servlet-mapping>
     <servlet-name>org.javimelli.rest.ApiRestRepositorio</servlet-name>

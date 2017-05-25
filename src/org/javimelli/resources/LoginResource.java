@@ -45,7 +45,11 @@ public class LoginResource {
 		if(session != null){
 			System.out.println("Id en get User: "+session.getId());
 			userSession = (User) session.getAttribute("user");
+			if(userSession != null){
+				userSession.setPassword("");
+			}
 		}
+		
 		
 		return userSession;
 	}
@@ -68,9 +72,10 @@ public class LoginResource {
 		if(userDB.getUsername() != null){
 			if(userDB.getUsername().equals(user.getUsername()) && userDB.getPassword().equals(user.getPassword())){
 				
-				HttpSession session = (HttpSession) request.getSession(true);
+				HttpSession session = (HttpSession) request.getSession();
 				session.setAttribute("user",userDB);
 				userSession = (User) session.getAttribute("user");
+				userSession.setPassword("");
 				System.out.println("Get ID Session: "+session.getId()+" User: "+userSession.getUsername()+" Password: "+userSession.getPassword());
 			}
 		}

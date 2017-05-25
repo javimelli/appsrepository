@@ -11,6 +11,7 @@ import java.io.OutputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -86,4 +87,26 @@ public class ImageResource {
 		
 		return res;
 	}
+	
+	@DELETE
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response deleteFile(@Context HttpServletRequest request){
+		
+		String url = request.getParameter("url");
+		
+		System.out.println(url);
+		boolean delete = false;
+		File fichero = new File(this.DIR_SERVER + url);
+		System.out.println(this.DIR_SERVER + url);
+		
+		if(fichero.delete()){
+			delete = true;
+		}
+		
+		Response res;
+		res = Response.ok(delete).build();
+		
+		return res;
+	}
+	
 }

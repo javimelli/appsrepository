@@ -12,5 +12,6 @@ public interface App_platformDao {
 	public List<Platform> getPlatformsByApps(int id);
 	public int add(App_platform app_platform);
 	public boolean delete(App_platform app_platform);
+	public boolean delete(int app);
 	public void setConnection(Connection conn);
 }

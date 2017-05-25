@@ -22,6 +22,7 @@ public class JDBCDatasetDao implements DatasetDao{
 	private static final String atrDescription = "description";
 	private static final String atrUri_dataset = "uri_dataset";
 	private static final String atrInstitution = "institution_id";
+	private static final String atrTitle = "title";
 	
 	private Connection conn;
 	
@@ -48,6 +49,7 @@ public class JDBCDatasetDao implements DatasetDao{
 				dataset.setDescription(rs.getString(atrDescription));
 				dataset.setUri_dataset(rs.getString(atrUri_dataset));
 				dataset.setInstitution_id(rs.getInt(atrInstitution));
+				dataset.setTitle(rs.getString(atrTitle));
 		
 				datasets.add(dataset);	
 			}
@@ -78,6 +80,7 @@ public class JDBCDatasetDao implements DatasetDao{
 					dataset.setDescription(rs.getString(atrDescription));
 					dataset.setUri_dataset(rs.getString(atrUri_dataset));
 					dataset.setInstitution_id(rs.getInt(atrInstitution));
+					dataset.setTitle(rs.getString(atrTitle));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -110,6 +113,7 @@ public class JDBCDatasetDao implements DatasetDao{
 				dataset.setDescription(rs.getString(atrDescription));
 				dataset.setUri_dataset(rs.getString(atrUri_dataset));
 				dataset.setInstitution_id(rs.getInt(atrInstitution));
+				dataset.setTitle(rs.getString(atrTitle));
 		
 				datasets.add(dataset);	
 			}
@@ -143,6 +147,7 @@ public class JDBCDatasetDao implements DatasetDao{
 				dataset.setDescription(rs.getString(atrDescription));
 				dataset.setUri_dataset(rs.getString(atrUri_dataset));
 				dataset.setInstitution_id(rs.getInt(atrInstitution));
+				dataset.setTitle(rs.getString(atrTitle));
 		
 				datasets.add(dataset);	
 			}
@@ -176,6 +181,7 @@ public class JDBCDatasetDao implements DatasetDao{
 				dataset.setDescription(rs.getString(atrDescription));
 				dataset.setUri_dataset(rs.getString(atrUri_dataset));
 				dataset.setInstitution_id(rs.getInt(atrInstitution));
+				dataset.setTitle(rs.getString(atrTitle));
 		
 				datasets.add(dataset);	
 			}
@@ -195,13 +201,14 @@ public class JDBCDatasetDao implements DatasetDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblDataset +" ("+atrId+","+atrCategory_id+","+atrUser_id+","+atrDescription+","+atrUri_dataset+","+atrInstitution+") VALUES("
+				String sql = "INSERT INTO "+tblDataset +" ("+atrId+","+atrCategory_id+","+atrUser_id+","+atrDescription+","+atrUri_dataset+","+atrInstitution+","+atrTitle+") VALUES("
 						+dataset.getId()+","
 						+dataset.getCategory_id()+","
 						+dataset.getUser_id()+",'"
 						+dataset.getDescription()+"','"
 						+dataset.getUri_dataset()+"',"
-						+dataset.getInstitution_id()+")";
+						+dataset.getInstitution_id()+",'"
+						+dataset.getTitle()+"')";
 				System.out.println(sql);
 				stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 				
@@ -233,7 +240,8 @@ public class JDBCDatasetDao implements DatasetDao{
 												+atrUser_id+"="+dataset.getUser_id()+","
 												+atrDescription+"='"+dataset.getDescription()+"',"
 												+atrUri_dataset+"='"+dataset.getUri_dataset()+"',"
-												+atrInstitution+"="+dataset.getInstitution_id()
+												+atrInstitution+"="+dataset.getInstitution_id()+","
+												+atrTitle+"='"+dataset.getTitle()+"'"
 												+" WHERE "+atrId+"="+dataset.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);

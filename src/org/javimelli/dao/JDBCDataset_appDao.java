@@ -30,6 +30,7 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 	private static final String atrDatasetDescription = "description";
 	private static final String atrDatasetUri_dataset = "uri_dataset";
 	private static final String atrDatasetInstitution = "institution_id";
+	private static final String atrDatasetTitle = "title";
 	
 	//CONSTANTES DE ATRIBUTOS DE TABLA app
 	private static final String atrAppId = "id";
@@ -69,6 +70,7 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 					dataset.setDescription(rs.getString(atrDatasetDescription));
 					dataset.setUri_dataset(rs.getString(atrDatasetUri_dataset));
 					dataset.setInstitution_id(rs.getInt(atrDatasetInstitution));
+					dataset.setTitle(rs.getString(atrDatasetTitle));
 					
 					ListDataset.add(dataset);
 				}
@@ -158,6 +160,26 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 			try {
 				stmt = conn.createStatement();
 				String sql = "DELETE FROM "+tblDataset_app+" WHERE "+atrApp_id+"="+dataset_app.getApp_id()+" AND "+atrDataset_id+"="+dataset_app.getDataset_id();
+				System.out.println(sql);
+				stmt.executeUpdate(sql);
+				done= true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return done;
+	}
+	
+	@Override
+	public boolean delete(int app) {
+		
+		boolean done = false;
+		if (conn != null){
+
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				String sql = "DELETE FROM "+tblDataset_app+" WHERE "+atrApp_id+"="+app;
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
 				done= true;

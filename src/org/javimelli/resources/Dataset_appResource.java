@@ -100,4 +100,17 @@ public class Dataset_appResource {
 		
 		dataset_appDao.delete(dataset_appEdit);
     }
+	
+	@DELETE
+	@Path("/{appId: [0-9]+}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteUserId(@PathParam("appId") int app){
+    	
+		//Obtenemos la conexion a la base de datos del contexto de la aplicacion
+    	Connection conn = (Connection) sc.getAttribute("dbConn");
+		Dataset_appDao dataset_appDao = new JDBCDataset_appDao();
+		dataset_appDao.setConnection(conn);
+		
+		dataset_appDao.delete(app);
+    }
 }

@@ -146,6 +146,25 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 		}
 		return done;
 	}
+	
+	@Override
+	public boolean delete(int app) {
+		boolean done = false;
+		if (conn != null){
+
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				String sql = "DELETE FROM "+tblApp_category+" WHERE "+atrApp_id+"="+app;
+				System.out.println(sql);
+				stmt.executeUpdate(sql);
+				done= true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return done;
+	}
 
 	@Override
 	public List<App> getAppByCategory(int category) {

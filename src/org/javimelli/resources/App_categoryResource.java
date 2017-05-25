@@ -119,4 +119,16 @@ public class App_categoryResource {
 		
 		app_categoryDao.delete(app_categoryEdit);
     }
+    
+    @DELETE
+    @Path("/{appId: [0-9]+}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteUserId(@PathParam("appId") int app){
+    	
+    	Connection conn = (Connection) sc.getAttribute("dbConn");
+		App_categoryDao app_categoryDao = new JDBCApp_categoryDao();
+		app_categoryDao.setConnection(conn);
+		
+		app_categoryDao.delete(app);
+    }
 }

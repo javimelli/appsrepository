@@ -119,7 +119,7 @@ public class AppResource {
     @PUT
     @Path("/{appId: [0-9]+}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response putUser(@PathParam("appId") int id, App appEdit){
+    public Response putUser(@PathParam("appId") int id, App appEdit,  @Context HttpServletRequest request){
     	
     	Response res = null;
     	
@@ -127,18 +127,28 @@ public class AppResource {
 		AppDao appDao = new JDBCAppDao();
 		appDao.setConnection(conn);
 		
-		App app = appDao.getById(appEdit.getId());
+		HttpSession session = (HttpSession) request.getSession();
+    	User user = (User) session.getAttribute("user");
+    	
+    	boolean save = false;
+    	
+    	if(user != null){
 		
-		if(app == null){
-			//Lazamos EXCEPTION
-		}else{
-			if(app.getId() == appEdit.getId()){
-				appDao.save(appEdit);
+			App app = appDao.getById(appEdit.getId());
+			
+			if(app == null){
+				//Lazamos EXCEPTION
+			}else{
+				if(app.getId() == appEdit.getId()){
+					save = appDao.save(appEdit);
+				}
+				else{
+					//LANZAMOS EXCEPTION DE ID
+				}
 			}
-			else{
-				//LANZAMOS EXCEPTION DE ID
-			}
-		}
+    	}
+    	
+    	res = Response.ok(save).build();
 		
 		return res;
     }

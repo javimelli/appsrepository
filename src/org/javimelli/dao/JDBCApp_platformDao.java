@@ -163,6 +163,26 @@ public class JDBCApp_platformDao implements App_platformDao{
 		}
 		return done;
 	}
+	
+	@Override
+	public boolean delete(int app) {
+		
+		boolean done = false;
+		if (conn != null){
+
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				String sql = "DELETE FROM "+tblApp_platform+" WHERE "+atrApp_id+"="+app;
+				System.out.println(sql);
+				stmt.executeUpdate(sql);
+				done= true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return done;
+	}
 
 	@Override
 	public void setConnection(Connection conn) {

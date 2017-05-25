@@ -13,5 +13,6 @@ public interface Dataset_appDao {
 	public List<App> getAppByDataset(int dataset);
 	public int add(Dataset_app dataset_app);
 	public boolean delete(Dataset_app dataset_app);
+	public boolean delete(int app);
 	public void setConnection(Connection conn);
 }

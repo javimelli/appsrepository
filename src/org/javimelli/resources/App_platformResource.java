@@ -97,4 +97,16 @@ public class App_platformResource {
 		
 		app_platformDao.delete(app_platformEdit);
     }
+	
+	@DELETE
+	@Path("/{appId: [0-9]+}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void deleteApp_platform(@PathParam("appId") int app){
+    	
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		App_platformDao app_platformDao = new JDBCApp_platformDao();
+		app_platformDao.setConnection(conn);
+		
+		app_platformDao.delete(app);
+    }
 }
