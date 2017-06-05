@@ -7,6 +7,8 @@ import org.javimelli.model.App;
 public interface AppDao {
 
 	public List<App> getAppsAll();
+	public List<App> getAppsByLmit(int numRegs,int init);
+	public List<App> getAppsByCountry(String country);
 	public List<App> getAllByOwner(int owner);
 	public App getById(int id);	
 	public int addApp(App app);

@@ -45,6 +45,8 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 	private static final String atrAppLanguage = "language";
 	private static final String atrAppCountry = "country";
 	private static final String atrAppId_fotos = "id_fotos";
+	private static final String atrAppDate = "date";
+	private static final String atrAppTime = "time";
 	
 	private Connection conn;
 
@@ -110,6 +112,8 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 					app.setLanguage(rs.getString(atrAppLanguage));
 					app.setCountry(rs.getString(atrAppCountry));
 					app.setId_fotos(rs.getString(atrAppId_fotos));
+					app.setTime(rs.getString(atrAppTime));
+					app.setDate(rs.getString(atrAppDate));
 					
 					ListApp.add(app);
 				}

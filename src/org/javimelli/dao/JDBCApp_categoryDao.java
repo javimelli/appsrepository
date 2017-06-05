@@ -40,6 +40,8 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 	private static final String atrAppLanguage = "language";
 	private static final String atrAppCountry = "country";
 	private static final String atrAppId_fotos = "id_fotos";
+	private static final String atrAppDate = "date";
+	private static final String atrAppTime = "time";
 	
 	private Connection conn;
 	
@@ -194,6 +196,48 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 					app.setLanguage(rs.getString(atrAppLanguage));
 					app.setCountry(rs.getString(atrAppCountry));
 					app.setId_fotos(rs.getString(atrAppId_fotos));
+					app.setTime(rs.getString(atrAppTime));
+					app.setDate(rs.getString(atrAppDate));
+					
+					ListApps.add(app);
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return ListApps;
+	}
+
+	@Override
+	public List<App> getAppByCategory(int category, String country) {
+		List<App> ListApps = new ArrayList<App>();
+		
+		if(conn != null){
+			Statement stmt;
+			
+			try{
+				stmt = conn.createStatement();
+				//SELECT * FROM app_category a INNER JOIN category c ON a.Category_id=c.id WHERE a.App_id=
+				String sql = "SELECT * FROM "+tblApp_category+" a INNER JOIN "+tblApp+" app ON a."+atrApp_id+"=app."+atrAppId+" WHERE a."+atrCategory_id+"="+category+" AND app."+atrAppCountry+"="+country;
+				System.out.println(sql);
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()){
+					App app = new App();
+					app.setId(rs.getInt(atrAppId));
+					app.setUser_id(rs.getInt(atrAppUser_id));
+					app.setUrl_web(rs.getString(atrAppUrl_web));
+					app.setTitle(rs.getString(atrAppTitle));
+					app.setDescription(rs.getString(atrAppDescription));
+					app.setUrl_icon(rs.getString(atrAppUrl_icon));
+					app.setPrice(rs.getInt(atrAppPrice));
+					app.setVersion(rs.getInt(atrAppVersion));
+					app.setUrl_video(rs.getString(atrAppUrl_video));
+					app.setLanguage(rs.getString(atrAppLanguage));
+					app.setCountry(rs.getString(atrAppCountry));
+					app.setId_fotos(rs.getString(atrAppId_fotos));
+					app.setTime(rs.getString(atrAppTime));
+					app.setDate(rs.getString(atrAppDate));
 					
 					ListApps.add(app);
 				}

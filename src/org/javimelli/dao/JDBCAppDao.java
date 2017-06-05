@@ -5,7 +5,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.AttributedCharacterIterator;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.javimelli.model.App;
@@ -29,6 +33,8 @@ public class JDBCAppDao implements AppDao{
 	private static final String atrLanguage = "language";
 	private static final String atrCountry = "country";
 	private static final String atrId_fotos = "id_fotos";
+	private static final String atrDate = "date";
+	private static final String atrTime = "time";
 	
 	@Override
 	public List<App> getAppsAll() {
@@ -59,6 +65,8 @@ public class JDBCAppDao implements AppDao{
 				app.setLanguage(rs.getString(atrLanguage));
 				app.setCountry(rs.getString(atrCountry));
 				app.setId_fotos(rs.getString(atrId_fotos));
+				app.setTime(rs.getString(atrTime));
+				app.setDate(rs.getString(atrDate));
 		
 				apps.add(app);	
 			}
@@ -96,6 +104,8 @@ public class JDBCAppDao implements AppDao{
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
 					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
 					
 					listApps.add(app);
 				}
@@ -133,6 +143,8 @@ public class JDBCAppDao implements AppDao{
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
 					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -147,11 +159,19 @@ public class JDBCAppDao implements AppDao{
 		
 		int id=-1;
 		if (conn != null){
+			
+			//CREACIÓN DE LA HORA Y LA FECHA
+			Date date = new Date();
+	    	System.out.println(date.getTime());
+	    	DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+	    	DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	    	System.out.println("Hora: "+timeFormat.format(date));
+	    	System.out.println("Fecha: "+dateFormat.format(date));
 
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+","+atrId_fotos+") VALUES("
+				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+","+atrId_fotos+","+atrTime+","+atrDate+") VALUES("
 						+app.getId()+","
 						+app.getUser_id()+",'"
 						+app.getUrl_web()+"','"
@@ -163,7 +183,9 @@ public class JDBCAppDao implements AppDao{
 						+app.getUrl_video()+"','"
 						+app.getLanguage()+"','"
 						+app.getCountry()+"','"
-						+app.getId_fotos()+"')";
+						+app.getId_fotos()+"','"
+						+timeFormat.format(date)+"','"
+						+dateFormat.format(date)+"')";
 				System.out.println(sql);
 				stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 				
@@ -236,6 +258,84 @@ public class JDBCAppDao implements AppDao{
 	public void setConnection(Connection conn) {
 		this.conn = conn;
 		
+	}
+
+	@Override
+	public List<App> getAppsByLmit(int numRegs, int init) {
+List<App> listApps = new ArrayList<App>();
+		
+		if(conn != null){
+			Statement stmt;
+			
+			try{
+				stmt = conn.createStatement();
+				String sql = "SELECT * FROM "+tblApp+ " LIMIT " + init + ", " + numRegs;
+				System.out.println(sql);
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()){
+					App app = new App();
+					app.setId(rs.getInt(atrId));
+					app.setUser_id(rs.getInt(atrUser_id));
+					app.setUrl_web(rs.getString(atrUrl_web));
+					app.setTitle(rs.getString(atrTitle));
+					app.setDescription(rs.getString(atrDescription));
+					app.setUrl_icon(rs.getString(atrUrl_icon));
+					app.setPrice(rs.getInt(atrPrice));
+					app.setVersion(rs.getInt(atrVersion));
+					app.setUrl_video(rs.getString(atrUrl_video));
+					app.setLanguage(rs.getString(atrLanguage));
+					app.setCountry(rs.getString(atrCountry));
+					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
+					
+					listApps.add(app);
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return listApps;
+	}
+
+	@Override
+	public List<App> getAppsByCountry(String country) {
+List<App> listApps = new ArrayList<App>();
+		
+		if(conn != null){
+			Statement stmt;
+			
+			try{
+				stmt = conn.createStatement();
+				String sql = "SELECT * FROM "+tblApp+" WHERE "+atrCountry+"= '"+country+"'";
+				System.out.println(sql);
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()){
+					App app = new App();
+					app.setId(rs.getInt(atrId));
+					app.setUser_id(rs.getInt(atrUser_id));
+					app.setUrl_web(rs.getString(atrUrl_web));
+					app.setTitle(rs.getString(atrTitle));
+					app.setDescription(rs.getString(atrDescription));
+					app.setUrl_icon(rs.getString(atrUrl_icon));
+					app.setPrice(rs.getInt(atrPrice));
+					app.setVersion(rs.getInt(atrVersion));
+					app.setUrl_video(rs.getString(atrUrl_video));
+					app.setLanguage(rs.getString(atrLanguage));
+					app.setCountry(rs.getString(atrCountry));
+					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
+					
+					listApps.add(app);
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return listApps;
 	}
 
 }

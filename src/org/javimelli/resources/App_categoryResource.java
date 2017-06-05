@@ -63,6 +63,21 @@ public class App_categoryResource {
 		return apps;
 	}
 	
+	@GET
+	@Path("/category/{categoryId: [0-9]+}/pais/{country}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<App> getApps(@PathParam("categoryId") int id,@PathParam("categoryId") String country, @Context HttpServletRequest request){
+		
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		App_categoryDao app_categoryDao = new JDBCApp_categoryDao();
+		app_categoryDao.setConnection(conn);
+		
+		List<App> apps = null;
+		apps = app_categoryDao.getAppByCategory(id, country);
+		
+		return apps;
+	}
+	
 	@POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postCategory(App_category app_category, @Context HttpServletRequest request){

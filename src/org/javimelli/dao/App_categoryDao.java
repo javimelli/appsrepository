@@ -11,6 +11,7 @@ public interface App_categoryDao {
 
 	public List<Category> getCategoryByApp(int appId);
 	public List<App> getAppByCategory(int category);
+	public List<App> getAppByCategory(int category, String country);
 	public int add(App_category app_category);
 	public boolean save(App_category app_category, int idCategoryOld);
 	public boolean delete(App_category app_category);

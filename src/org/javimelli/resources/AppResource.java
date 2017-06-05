@@ -80,6 +80,36 @@ public class AppResource {
 		return app;
 	}
     
+    @GET
+	@Path("/limit/{num: [0-9]+}/{init: [0-9]+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<App> getAppByLimit(@PathParam("num") int num, @PathParam("init") int init,  @Context HttpServletRequest request){
+		
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		AppDao appDao = new JDBCAppDao();
+		appDao.setConnection(conn);
+		
+		List<App> app = null;
+		app = appDao.getAppsByLmit(num, init);
+		
+		return app;
+	}
+    
+    @GET
+	@Path("/country/{country}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<App> getAppByCountry(@PathParam("country") String country,  @Context HttpServletRequest request){
+		
+		Connection conn = (Connection) sc.getAttribute("dbConn");
+		AppDao appDao = new JDBCAppDao();
+		appDao.setConnection(conn);
+		
+		List<App> app = null;
+		app = appDao.getAppsByCountry(country);
+		
+		return app;
+	}
+    
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response postApp(App app, @Context HttpServletRequest request){

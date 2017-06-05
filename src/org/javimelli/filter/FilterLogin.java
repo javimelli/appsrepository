@@ -50,11 +50,20 @@ public class FilterLogin implements Filter {
 	    HttpServletResponse res = (HttpServletResponse) response;
 	    
 	    HttpSession session = ((HttpServletRequest)request).getSession(true);
-		logger.info("Comprobamos si hay sesion");//Si no hay sesion a logearse
+		logger.info("Comprobamos si hay sesion" + session.getId());//Si no hay sesion a logearse
+		//chain.doFilter(request, response);
 		
 		if((req.getRequestURI().contains("/resources/apps")&&(req.getMethod().equalsIgnoreCase("GET"))) ||
-				req.getRequestURI().contains("/ApiRestRepositorio/resources/session"))
-	    {
+				(req.getRequestURI().contains("/resources/apps")&&(req.getMethod().equalsIgnoreCase("DELETE"))) ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/session") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/categorys") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/images/id_fotos/") ||
+				req.getMethod().equalsIgnoreCase("OPTIONS") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/users") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/filtros") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/votes_apps/averageVotes/") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/datasets") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/institutions")){
 		    	System.out.println("Entamos en dofilter" + req.getRequestURI());
 		    	chain.doFilter(request, response);
 	    }else{
