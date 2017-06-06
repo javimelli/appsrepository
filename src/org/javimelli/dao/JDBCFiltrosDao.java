@@ -37,6 +37,8 @@ public class JDBCFiltrosDao  implements FiltrosDao{
 	private static final String atrLanguage = "language";
 	private static final String atrCountry = "country";
 	private static final String atrId_fotos = "id_fotos";
+	private static final String atrDate = "date";
+	private static final String atrTime = "time";
 	
 	//CONSTANTES DE TABLA APP_CATEGORY
 	private static final String atrtblApp_categoryApp_id = "app_id";
@@ -142,6 +144,8 @@ public class JDBCFiltrosDao  implements FiltrosDao{
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
 					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
 					
 					apps.add(app);
 				}
@@ -180,6 +184,8 @@ public class JDBCFiltrosDao  implements FiltrosDao{
 					app.setLanguage(rs.getString(atrLanguage));
 					app.setCountry(rs.getString(atrCountry));
 					app.setId_fotos(rs.getString(atrId_fotos));
+					app.setTime(rs.getString(atrTime));
+					app.setDate(rs.getString(atrDate));
 					
 					listApps.add(app);
 				}

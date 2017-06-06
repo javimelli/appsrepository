@@ -14,13 +14,15 @@ public class App {
 	private String language;
 	private String country;
 	private String id_fotos;
+	private String time;
+	private String date;
 	
 	public App(){
 		
 	}
 
 	public App(int id, int user_id, String url_web, String title, String description, String url_icon, int price,
-			int version, String url_video, String language, String country) {
+			int version, String url_video, String language, String country, String id_fotos, String time, String date) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -33,7 +35,12 @@ public class App {
 		this.url_video = url_video;
 		this.language = language;
 		this.country = country;
+		this.id_fotos = id_fotos;
+		this.time = time;
+		this.date = date;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -130,6 +137,23 @@ public class App {
 	public void setId_fotos(String id_fotos) {
 		this.id_fotos = id_fotos;
 	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+	
 	
 	
 }
