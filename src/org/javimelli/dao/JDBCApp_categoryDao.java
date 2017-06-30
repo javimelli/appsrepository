@@ -42,6 +42,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 	private static final String atrAppId_fotos = "id_fotos";
 	private static final String atrAppDate = "date";
 	private static final String atrAppTime = "time";
+	private static final String atrAppVisitas = "visits";
 	
 	private Connection conn;
 	
@@ -198,6 +199,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 					app.setId_fotos(rs.getString(atrAppId_fotos));
 					app.setTime(rs.getString(atrAppTime));
 					app.setDate(rs.getString(atrAppDate));
+					app.setVisitas(rs.getInt(atrAppVisitas));
 					
 					ListApps.add(app);
 				}
@@ -238,6 +240,7 @@ public class JDBCApp_categoryDao implements App_categoryDao {
 					app.setId_fotos(rs.getString(atrAppId_fotos));
 					app.setTime(rs.getString(atrAppTime));
 					app.setDate(rs.getString(atrAppDate));
+					app.setVisitas(rs.getInt(atrAppVisitas));
 					
 					ListApps.add(app);
 				}

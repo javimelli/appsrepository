@@ -16,13 +16,15 @@ public class App {
 	private String id_fotos;
 	private String time;
 	private String date;
+	private int visits;
 	
 	public App(){
 		
 	}
 
 	public App(int id, int user_id, String url_web, String title, String description, String url_icon, int price,
-			int version, String url_video, String language, String country, String id_fotos, String time, String date) {
+			int version, String url_video, String language, String country, String id_fotos, String time, String date,
+			int visits) {
 		super();
 		this.id = id;
 		this.user_id = user_id;
@@ -38,7 +40,10 @@ public class App {
 		this.id_fotos = id_fotos;
 		this.time = time;
 		this.date = date;
+		this.visits = visits;
 	}
+
+
 
 
 
@@ -152,6 +157,14 @@ public class App {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public int getVisitas() {
+		return visits;
+	}
+
+	public void setVisitas(int visits) {
+		this.visits = visits;
 	}
 	
 	

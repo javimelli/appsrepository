@@ -30,6 +30,7 @@ public class JDBCUserDao  implements UserDao{
 	private static final String atrCountry = "country";
 	private static final String atrUrl_foto = "url_foto";
 	private static final String atrPassword = "password";
+	private static final String atrId_fotos = "id_fotos";
 	
 	
 	@Override
@@ -60,6 +61,7 @@ public class JDBCUserDao  implements UserDao{
 				user.setCountry(rs.getString(atrCountry));
 				user.setUrl_foto(rs.getString(atrUrl_foto));
 				user.setPassword(rs.getString(atrPassword));
+				user.setId_fotos(rs.getString(atrId_fotos));
 				
 				
 				users.add(user);
@@ -81,7 +83,7 @@ public class JDBCUserDao  implements UserDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblUser +" ("+atrName+","+atrLast_name1+","+atrLast_name2+","+atrUsername+","+atrTlf+","+atrUrl_web+","+atrEmail+","+atrCountry+","+atrUrl_foto+","+atrPassword+") VALUES('"
+				String sql = "INSERT INTO "+tblUser +" ("+atrName+","+atrLast_name1+","+atrLast_name2+","+atrUsername+","+atrTlf+","+atrUrl_web+","+atrEmail+","+atrCountry+","+atrUrl_foto+","+atrPassword+","+atrId_fotos+") VALUES('"
 						+user.getName()+"','"
 						+user.getLast_name1()+"','"
 						+user.getLast_name2()+"','"
@@ -91,7 +93,8 @@ public class JDBCUserDao  implements UserDao{
 						+user.getEmail()+"','"
 						+user.getCountry()+"','"
 						+user.getUrl_foto()+"','"
-						+user.getPassword()+"')";
+						+user.getPassword()+"','"
+						+user.getId_fotos()+"')";
 				System.out.println(sql);
 				stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 				
@@ -134,6 +137,7 @@ public class JDBCUserDao  implements UserDao{
 					user.setCountry(rs.getString(atrCountry));
 					user.setUrl_foto(rs.getString(atrUrl_foto));
 					user.setPassword(rs.getString(atrPassword));
+					user.setId_fotos(rs.getString(atrId_fotos));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -168,6 +172,7 @@ public class JDBCUserDao  implements UserDao{
 					user.setCountry(rs.getString(atrCountry));
 					user.setUrl_foto(rs.getString(atrUrl_foto));
 					user.setPassword(rs.getString(atrPassword));
+					user.setId_fotos(rs.getString(atrId_fotos));
 				}
 				
 			}catch(SQLException e){
@@ -196,7 +201,8 @@ public class JDBCUserDao  implements UserDao{
 												+atrEmail+"='"+user.getEmail()+"',"
 												+atrCountry+"='"+user.getCountry()+"',"
 												+atrUrl_foto+"='"+user.getUrl_foto()+"',"
-												+atrPassword+"='"+user.getPassword()+"'"
+												+atrPassword+"='"+user.getPassword()+"',"
+												+atrId_fotos+"='"+user.getId_fotos()+"'"
 												+" WHERE "+atrId+"="+user.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);

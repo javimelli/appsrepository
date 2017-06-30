@@ -4,6 +4,7 @@ package org.javimelli.model;
 public class Commentary {
 	
 	private int id;
+	private int id_padre;
 	private int user_id;
 	private int app_id;
 	private String date;
@@ -14,15 +15,20 @@ public class Commentary {
 		
 	}
 
-	public Commentary(int id, int user_id, int app_id, String date, String time, String text) {
+	
+
+	public Commentary(int id, int id_padre, int user_id, int app_id, String date, String time, String text) {
 		super();
 		this.id = id;
+		this.id_padre = id_padre;
 		this.user_id = user_id;
 		this.app_id = app_id;
 		this.date = date;
 		this.time = time;
 		this.text = text;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -71,6 +77,20 @@ public class Commentary {
 	public void setText(String text) {
 		this.text = text;
 	}
+
+
+
+	public int getId_padre() {
+		return id_padre;
+	}
+
+
+
+	public void setId_padre(int id_padre) {
+		this.id_padre = id_padre;
+	}
+	
+	
 	
 	
 }

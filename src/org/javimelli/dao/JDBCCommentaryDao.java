@@ -26,7 +26,7 @@ public class JDBCCommentaryDao implements CommentaryDao{
 	private static final String atrDate = "date";
 	private static final String atrTime = "time";
 	private static final String atrText = "text";
-	
+	private static final String atrId_padre = "id_padre";
 	
 	@Override
 	public List<Commentary> getAll() {
@@ -51,6 +51,7 @@ public class JDBCCommentaryDao implements CommentaryDao{
 				commentary.setDate(rs.getString(atrDate));
 				commentary.setTime(rs.getString(atrTime));
 				commentary.setText(rs.getString(atrText));
+				commentary.setId_padre(rs.getInt(atrId_padre));
 		
 				commentarys.add(commentary);	
 			}
@@ -84,6 +85,7 @@ public class JDBCCommentaryDao implements CommentaryDao{
 				commentary.setDate(rs.getString(atrDate));
 				commentary.setTime(rs.getString(atrTime));
 				commentary.setText(rs.getString(atrText));
+				commentary.setId_padre(rs.getInt(atrId_padre));
 		
 				commentarys.add(commentary);	
 			}
@@ -117,6 +119,7 @@ if (conn == null) return null;
 				commentary.setDate(rs.getString(atrDate));
 				commentary.setTime(rs.getString(atrTime));
 				commentary.setText(rs.getString(atrText));
+				commentary.setId_padre(rs.getInt(atrId_padre));
 		
 				commentarys.add(commentary);	
 			}
@@ -147,6 +150,7 @@ if (conn == null) return null;
 					commentary.setDate(rs.getString(atrDate));
 					commentary.setTime(rs.getString(atrTime));
 					commentary.setText(rs.getString(atrText));
+					commentary.setId_padre(rs.getInt(atrId_padre));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -173,8 +177,9 @@ if (conn == null) return null;
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblCommentary +" ("+atrId+","+atrUser_id+","+atrApp_id+","+atrDate+","+atrTime+","+atrText+") VALUES("
+				String sql = "INSERT INTO "+tblCommentary +" ("+atrId+","+atrId_padre+","+atrUser_id+","+atrApp_id+","+atrDate+","+atrTime+","+atrText+") VALUES("
 						+commentary.getId()+","
+						+commentary.getId_padre()+","
 						+commentary.getUser_id()+","
 						+commentary.getApp_id()+",'"
 						+dateFormat.format(date)+"','"
@@ -207,6 +212,7 @@ if (conn == null) return null;
 			try{
 				stmt = conn.createStatement();
 				String sql = "UPDATE "+ tblCommentary +" SET "+atrId+"="+commentary.getId()+","
+												+atrId_padre+"="+commentary.getId_padre()+","
 												+atrUser_id+"="+commentary.getUser_id()+","
 												+atrApp_id+"="+commentary.getApp_id()+","
 												+atrText+"='"+commentary.getText()+"'"

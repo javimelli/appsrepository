@@ -17,7 +17,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 	//CONSTANTES TABLAS
 	private static final String tblVote_comment = "vote_comment";
 	//CONSTANTE ATRIBUTOS DE TABLA
-	private static final String atrUser_id = "User_id";
+	private static final String atrUser_id = "user_id";
 	private static final String atrCommentary_id = "Commentary_id";
 	private static final String atrValue = "value";
 	private static final String atrComplaint = "complaint";
@@ -82,7 +82,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 	
 	@Override
 	public Vote_comment getByUserAndCommentary(int user, int comment){
-		Vote_comment vote = new Vote_comment();
+		Vote_comment vote = null;
 		
 		if(conn != null){
 			Statement stmt;
@@ -93,6 +93,7 @@ public class JDBCVote_commentDao implements Vote_commentDao{
 				System.out.println(sql);
 				ResultSet rs = stmt.executeQuery(sql);
 				if(rs.next()){
+					vote = new Vote_comment();
 					vote.setUser_id(rs.getInt(atrUser_id));
 					vote.setCommentary_id(rs.getInt(atrCommentary_id));
 					vote.setValue(rs.getBoolean(atrValue));

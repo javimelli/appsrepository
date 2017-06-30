@@ -47,6 +47,7 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 	private static final String atrAppId_fotos = "id_fotos";
 	private static final String atrAppDate = "date";
 	private static final String atrAppTime = "time";
+	private static final String atrAppVisitas = "visits";
 	
 	private Connection conn;
 
@@ -114,6 +115,7 @@ public class JDBCDataset_appDao implements Dataset_appDao{
 					app.setId_fotos(rs.getString(atrAppId_fotos));
 					app.setTime(rs.getString(atrAppTime));
 					app.setDate(rs.getString(atrAppDate));
+					app.setVisitas(rs.getInt(atrAppVisitas));
 					
 					ListApp.add(app);
 				}

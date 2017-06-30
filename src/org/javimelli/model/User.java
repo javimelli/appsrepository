@@ -14,12 +14,15 @@ public class User{
 	private String country;
 	private String url_foto;
 	private String password;
+	private String id_fotos;
 	
 	public User() {
 	}
 	
+	
 	public User(int id, String name, String last_name1, String last_name2, String username, String tlf, String url_web,
-			String email, String country, String url_foto, String password) {
+			String email, String country, String url_foto, String password, String id_fotos) {
+		super();
 		this.id = id;
 		this.name = name;
 		Last_name1 = last_name1;
@@ -31,7 +34,10 @@ public class User{
 		this.country = country;
 		this.url_foto = url_foto;
 		this.password = password;
+		this.id_fotos = id_fotos;
 	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -97,6 +103,16 @@ public class User{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+
+	public String getId_fotos() {
+		return id_fotos;
+	}
+
+
+	public void setId_fotos(String id_fotos) {
+		this.id_fotos = id_fotos;
 	}
 	
 	

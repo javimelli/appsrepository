@@ -162,9 +162,9 @@ public class AppResource {
     	
     	boolean save = false;
     	
-    	if(user != null){
-		
-			App app = appDao.getById(appEdit.getId());
+    	App app = appDao.getById(appEdit.getId());
+    	
+    	if(user != null || (app != null && (app.getVisitas() != appEdit.getVisitas()))){
 			
 			if(app == null){
 				//Lazamos EXCEPTION

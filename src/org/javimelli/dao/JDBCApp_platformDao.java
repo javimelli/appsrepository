@@ -39,6 +39,7 @@ public class JDBCApp_platformDao implements App_platformDao{
 	private static final String atrAppId_fotos = "id_fotos";
 	private static final String atrAppDate = "date";
 	private static final String atrAppTime = "time";
+	private static final String atrAppVisitas = "visits";
 	
 	//CONSTANTES DE ATRIBUTOS DE TABLA platform
 	private static final String atrPlatformId = "id";
@@ -77,6 +78,7 @@ public class JDBCApp_platformDao implements App_platformDao{
 					app.setId_fotos(rs.getString(atrAppId_fotos));
 					app.setTime(rs.getString(atrAppTime));
 					app.setDate(rs.getString(atrAppDate));
+					app.setVisitas(rs.getInt(atrAppVisitas));
 					
 					ListApps.add(app);
 				}

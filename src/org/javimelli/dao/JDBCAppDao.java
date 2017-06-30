@@ -35,6 +35,7 @@ public class JDBCAppDao implements AppDao{
 	private static final String atrId_fotos = "id_fotos";
 	private static final String atrDate = "date";
 	private static final String atrTime = "time";
+	private static final String atrVisitas = "visits";
 	
 	@Override
 	public List<App> getAppsAll() {
@@ -67,6 +68,7 @@ public class JDBCAppDao implements AppDao{
 				app.setId_fotos(rs.getString(atrId_fotos));
 				app.setTime(rs.getString(atrTime));
 				app.setDate(rs.getString(atrDate));
+				app.setVisitas(rs.getInt(atrVisitas));
 		
 				apps.add(app);	
 			}
@@ -106,6 +108,7 @@ public class JDBCAppDao implements AppDao{
 					app.setId_fotos(rs.getString(atrId_fotos));
 					app.setTime(rs.getString(atrTime));
 					app.setDate(rs.getString(atrDate));
+					app.setVisitas(rs.getInt(atrVisitas));
 					
 					listApps.add(app);
 				}
@@ -145,6 +148,7 @@ public class JDBCAppDao implements AppDao{
 					app.setId_fotos(rs.getString(atrId_fotos));
 					app.setTime(rs.getString(atrTime));
 					app.setDate(rs.getString(atrDate));
+					app.setVisitas(rs.getInt(atrVisitas));
 				}
 			} catch (SQLException e){
 				e.printStackTrace();
@@ -171,7 +175,7 @@ public class JDBCAppDao implements AppDao{
 			Statement stmt;
 			try {
 				stmt = conn.createStatement();
-				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+","+atrId_fotos+","+atrTime+","+atrDate+") VALUES("
+				String sql = "INSERT INTO "+tblApp +" ("+atrId+","+atrUser_id+","+atrUrl_web+","+atrTitle+","+atrDescription+","+atrUrl_icon+","+atrPrice+","+atrVersion+","+atrUrl_video+","+atrLanguage+","+atrCountry+","+atrId_fotos+","+atrTime+","+atrDate+","+atrVisitas+") VALUES("
 						+app.getId()+","
 						+app.getUser_id()+",'"
 						+app.getUrl_web()+"','"
@@ -185,7 +189,8 @@ public class JDBCAppDao implements AppDao{
 						+app.getCountry()+"','"
 						+app.getId_fotos()+"','"
 						+timeFormat.format(date)+"','"
-						+dateFormat.format(date)+"')";
+						+dateFormat.format(date)+"',"
+						+app.getVisitas()+")";
 				System.out.println(sql);
 				stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
 				
@@ -222,7 +227,8 @@ public class JDBCAppDao implements AppDao{
 												+atrVersion+"="+app.getVersion()+","
 												+atrUrl_video+"='"+app.getUrl_video()+"',"
 												+atrLanguage+"='"+app.getLanguage()+"',"
-												+atrCountry+"='"+app.getCountry()+"'"
+												+atrCountry+"='"+app.getCountry()+"',"
+												+atrVisitas+"="+app.getVisitas()
 												+" WHERE "+atrId+"="+app.getId();
 				System.out.println(sql);
 				stmt.executeUpdate(sql);
@@ -288,6 +294,7 @@ List<App> listApps = new ArrayList<App>();
 					app.setId_fotos(rs.getString(atrId_fotos));
 					app.setTime(rs.getString(atrTime));
 					app.setDate(rs.getString(atrDate));
+					app.setVisitas(rs.getInt(atrVisitas));
 					
 					listApps.add(app);
 				}

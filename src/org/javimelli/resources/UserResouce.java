@@ -42,6 +42,14 @@ public class UserResouce {
 		
 		User user = null;
 		user = userDao.get(id);
+		String edit = "";
+		edit = request.getParameter("edit");
+		//System.out.println(edit);
+		if(edit == null){
+			user.setPassword("");
+			user.setTlf("");
+		}
+		
 		
 		return user;
 	}

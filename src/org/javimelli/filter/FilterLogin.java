@@ -53,7 +53,7 @@ public class FilterLogin implements Filter {
 		logger.info("Comprobamos si hay sesion" + session.getId());//Si no hay sesion a logearse
 		//chain.doFilter(request, response);
 		
-		if((req.getRequestURI().contains("/resources/apps")&&(req.getMethod().equalsIgnoreCase("GET"))) ||
+		if((req.getRequestURI().contains("/resources/apps/")&&(req.getMethod().equalsIgnoreCase("GET"))) ||
 				(req.getRequestURI().contains("/resources/apps")&&(req.getMethod().equalsIgnoreCase("DELETE"))) ||
 				req.getRequestURI().contains("/ApiRestRepositorio/resources/session") ||
 				req.getRequestURI().contains("/ApiRestRepositorio/resources/categorys") ||
@@ -63,7 +63,15 @@ public class FilterLogin implements Filter {
 				req.getRequestURI().contains("/ApiRestRepositorio/resources/filtros") ||
 				req.getRequestURI().contains("/ApiRestRepositorio/resources/votes_apps/averageVotes/") ||
 				req.getRequestURI().contains("/ApiRestRepositorio/resources/datasets") ||
-				req.getRequestURI().contains("/ApiRestRepositorio/resources/institutions")){
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/institutions") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/commentarys") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/votes_apps") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/Votes_comments/") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/apps/") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/apps_categorys/") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/apps_platforms/")||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/images/") ||
+				req.getRequestURI().contains("/ApiRestRepositorio/resources/image")){
 		    	System.out.println("Entamos en dofilter" + req.getRequestURI());
 		    	chain.doFilter(request, response);
 	    }else{

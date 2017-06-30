@@ -79,6 +79,8 @@ public class JDBCImagesDao implements ImagesDao{
 		
 		return images;
 	}
+	
+	
 	@Override
 	public int addImages(Images img) {
 		int id=-1;

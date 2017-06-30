@@ -1,0 +1,128 @@
+package org.javimelli.dao;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.javimelli.model.App;
+import org.javimelli.model.Dataset;
+
+import java.sql.Connection;
+
+public class JDBCEstadisticasDao implements EstadisticasDao{
+	
+	//CONSTANTES DE TABLA
+	private static final String tblApp = "app";
+	private static final String tblDataset = "dataset";
+	
+	//CONSTANTES DE ATRIBUTOS DE TABLA app
+	private static final String atrAppId = "id";
+	private static final String atrAppUser_id = "user_id";
+	private static final String atrAppUrl_web = "url_web";
+	private static final String atrAppTitle = "title";
+	private static final String atrAppDescription = "description";
+	private static final String atrAppUrl_icon = "url_icon";
+	private static final String atrAppPrice = "price";
+	private static final String atrAppVersion = "version";
+	private static final String atrAppUrl_video = "url_video";
+	private static final String atrAppLanguage = "language";
+	private static final String atrAppCountry = "country";
+	private static final String atrAppId_fotos = "id_fotos";
+	private static final String atrAppDate = "date";
+	private static final String atrAppTime = "time";
+	private static final String atrAppVisitas = "visits";
+	
+	//CONSTANTES DE ATRIBUTOS DE TABLA dataset
+	private static final String atrDatasetId = "id";
+	private static final String atrDatasetCategory_id = "category_id";
+	private static final String atrDatasetUser_id = "user_id";
+	private static final String atrDatasetDescription = "description";
+	private static final String atrDatasetUri_dataset = "uri_dataset";
+	private static final String atrDatasetInstitution = "institution_id";
+	private static final String atrDatasetTitle = "title";
+	
+	private Connection conn;
+
+	@Override
+	public List<App> getAppsByTitle() {
+		List<App> ListApps = new ArrayList<App>();
+		
+		if(conn != null){
+			Statement stmt;
+			
+			try{
+				stmt = conn.createStatement();
+				//SELECT * FROM app_category a INNER JOIN category c ON a.Category_id=c.id WHERE a.App_id=
+				String sql = "SELECT * FROM "+tblApp+" ORDER BY "+atrAppTitle+" ASC";
+				System.out.println(sql);
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()){
+					App app = new App();
+					app.setId(rs.getInt(atrAppId));
+					app.setUser_id(rs.getInt(atrAppUser_id));
+					app.setUrl_web(rs.getString(atrAppUrl_web));
+					app.setTitle(rs.getString(atrAppTitle));
+					app.setDescription(rs.getString(atrAppDescription));
+					app.setUrl_icon(rs.getString(atrAppUrl_icon));
+					app.setPrice(rs.getInt(atrAppPrice));
+					app.setVersion(rs.getInt(atrAppVersion));
+					app.setUrl_video(rs.getString(atrAppUrl_video));
+					app.setLanguage(rs.getString(atrAppLanguage));
+					app.setCountry(rs.getString(atrAppCountry));
+					app.setId_fotos(rs.getString(atrAppId_fotos));
+					app.setTime(rs.getString(atrAppTime));
+					app.setDate(rs.getString(atrAppDate));
+					app.setVisitas(rs.getInt(atrAppVisitas));
+					
+					ListApps.add(app);
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return ListApps;
+	}
+
+	@Override
+	public void setConnection(Connection conn) {
+		
+		this.conn = conn;
+	}
+
+	@Override
+	public List<Dataset> getDatasetsTitle() {
+List<Dataset> ListDataset = new ArrayList<Dataset>();
+		
+		if(conn != null){
+			Statement stmt;
+			
+			try{
+				stmt = conn.createStatement();
+				//SELECT * FROM app_category a INNER JOIN category c ON a.Category_id=c.id WHERE a.App_id=
+				String sql = "SELECT * FROM "+tblDataset+" ORDER BY "+atrDatasetTitle+" ASC";
+				System.out.println(sql);
+				ResultSet rs = stmt.executeQuery(sql);
+				while(rs.next()){
+					Dataset dataset = new Dataset();
+					dataset.setId(rs.getInt(atrDatasetId));
+					dataset.setCategory_id(rs.getInt(atrDatasetCategory_id));
+					dataset.setUser_id(rs.getInt(atrDatasetUser_id));
+					dataset.setDescription(rs.getString(atrDatasetDescription));
+					dataset.setUri_dataset(rs.getString(atrDatasetUri_dataset));
+					dataset.setInstitution_id(rs.getInt(atrDatasetInstitution));
+					dataset.setTitle(rs.getString(atrDatasetTitle));
+					
+					ListDataset.add(dataset);
+				}
+			} catch (SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return ListDataset;
+	}
+
+}

@@ -54,12 +54,17 @@ public class ImageResource {
 		String id_form = request.getParameter("id_form");
 		String url_location = null;
 		try{
-			if(img.equals("capture")){
-				url = this.FILE_LOCATION.concat("\\apps\\" + id_form + "\\capturas\\");
+			if(img.equals("user")){
+				url = this.FILE_LOCATION.concat("\\users\\" + id_form + "\\");
 				url_location = this.DIR_SERVER + url;
 			}else{
-				url = this.FILE_LOCATION.concat("\\apps\\" + id_form + "\\iconos\\");
-				url_location = this.DIR_SERVER + url;
+				if(img.equals("capture")){
+					url = this.FILE_LOCATION.concat("\\apps\\" + id_form + "\\capturas\\");
+					url_location = this.DIR_SERVER + url;
+				}else{
+					url = this.FILE_LOCATION.concat("\\apps\\" + id_form + "\\iconos\\");
+					url_location = this.DIR_SERVER + url;
+				}
 			}
 			File file = new File(url_location);
 			if(file.mkdirs()){
@@ -89,17 +94,29 @@ public class ImageResource {
 	}
 	
 	@DELETE
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	//@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response deleteFile(@Context HttpServletRequest request){
 		
 		String url = request.getParameter("url");
 		
 		System.out.println(url);
+		String urlValida = url.replace("/", "\\");
 		boolean delete = false;
-		File fichero = new File(this.DIR_SERVER + url);
-		System.out.println(this.DIR_SERVER + url);
+		File fichero = new File(this.DIR_SERVER + urlValida);
+		System.out.println(this.DIR_SERVER + urlValida);
 		
 		if(fichero.delete()){
+			delete = true;
+		}
+		
+		String directorio = "";
+		String[] nombreFichero = urlValida.split("\\\\");
+		for(int i=0; i<nombreFichero.length-1; i++){
+			directorio += nombreFichero[i] + "\\";
+		}
+		System.out.println(directorio);
+		File directorioBorrar = new File(this.DIR_SERVER + directorio);
+		if(directorioBorrar.delete()){
 			delete = true;
 		}
 		
